@@ -1,0 +1,31 @@
+{
+  "name": "first3D",
+  "version": "1.0.0",
+  "description": "The first project Three.js",
+  "keywords": [],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/drei": "9.83.9",
+    "@react-three/fiber": "8.14.2",
+    "@types/three": "0.152.1",
+    "maath": "0.10.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "tailwindcss": "3.3.3",
+    "three": "0.156.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
