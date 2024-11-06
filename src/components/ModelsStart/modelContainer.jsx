@@ -1,35 +1,65 @@
 import {Canvas} from "@react-three/fiber";
-import {ARButton, XR} from "@react-three/xr";
-import ModelsStart from "./index";
-import CustomARButton from "../buttons/AR";
+import {
+    XR,
+    createXRStore,
+    XRHandModel,
+    XRSpace,
+    XRHitTest,
+    useXRInputSourceStateContext,
+    XRControllerModel
+} from "@react-three/xr";
+import ModelsStart from "../ModelsStart/index";
+import {Suspense} from "react";
 
+
+
+const store = createXRStore({
+    controller: () => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const state = useXRInputSourceStateContext()
+        return (
+            <>
+                <XRControllerModel />
+                <XRHitTest
+                    space={state.inputSource.targetRaySpace}
+                />
+            </>
+        )
+    },
+
+})
 
 const ModelContainer = () => {
-    return <>
-        <ARButton 
-        sessionInit={{
-            requiredFeatures: ["hit-test"],
-            optionalFeatures: ["dom-overlay"],
-        }}
-        />
-        <Canvas shadows camera={{position: [-1, 1, 1], zoom: 1.8}}>
+    console.log('store.getState().session', store.getState())
 
-            {/* <CustomARButton/> */}
-            <color attach={"background"} args={["lightgreen"]}/>
-            <spotLight
-                position={[8, 11, 3]}
-                angel={0.3}
-                penunbra={1}
-                intensity={2}
-                castShow
-                shadow-mapSize-width={1024}
-                shadow-mapSize-height={1024}
-            />
-            <XR>
-                <ModelsStart/>
-            </XR>
-        </Canvas>
-    </>
-}
+    return (
+        <>
+            <button className={'btn'} onClick={() => store.enterAR()}>
+                <svg width="180px" height="60px" viewBox="0 0 180 60" className="border">
+                    <polyline points="179,1 179,59 1,59 1,1 179,1" className="bg-line"/>
+                    <polyline points="179,1 179,59 1,59 1,1 179,1" className="hl-line"/>
+                </svg>
+                Вход AR
+            </button>
+            {/*<button className={'btn'} onClick={() => store.getState().session?.end()}>*/}
+            {/*    <svg width="180px" height="60px" viewBox="0 0 180 60" className="border">*/}
+            {/*        <polyline points="179,1 179,59 1,59 1,1 179,1" className="bg-line"/>*/}
+            {/*        <polyline points="179,1 179,59 1,59 1,1 179,1" className="hl-line"/>*/}
+            {/*    </svg>*/}
+            {/*    Выход AR*/}
+            {/*</button>*/}
+            <Canvas shadows camera={{position: [1, 1, 1], zoom: 1.9}}>
+                <XR store={store}>
+                    <Suspense fallback={null}>
+                        <directionalLight position={[-1, 20, 30]}/>
+                        <ambientLight/>
+                        <color attach={"background"} args={["lightgreen"]}/>
+                        <ModelsStart/>
+                    </Suspense>
+                </XR>
+            </Canvas>
+        </>
+    );
+};
 
 export default ModelContainer;
