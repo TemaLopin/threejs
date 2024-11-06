@@ -6,14 +6,14 @@ import CustomARButton from "../buttons/AR";
 
 const ModelContainer = () => {
     return <>
-        {/* <ARButton 
+        <ARButton 
         sessionInit={{
             requiredFeatures: ["hit-test"]
         }}
-        /> */}
+        />
         <Canvas shadows camera={{position: [-1, 1, 1], zoom: 1.8}}>
 
-            <CustomARButton/>
+            {/* <CustomARButton/> */}
             <color attach={"background"} args={["lightgreen"]}/>
             <spotLight
                 position={[8, 11, 3]}
