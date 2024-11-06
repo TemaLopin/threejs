@@ -8,7 +8,8 @@ const ModelContainer = () => {
     return <>
         <ARButton 
         sessionInit={{
-            requiredFeatures: ["hit-test"]
+            requiredFeatures: ["hit-test"],
+            optionalFeatures: ["dom-overlay"],
         }}
         />
         <Canvas shadows camera={{position: [-1, 1, 1], zoom: 1.8}}>
