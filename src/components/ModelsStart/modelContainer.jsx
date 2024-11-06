@@ -2,14 +2,14 @@ import {Canvas} from "@react-three/fiber";
 import {ARButton, XR} from "@react-three/xr";
 import ModelsStart from "./index";
 import CustomARButton from "../buttons/AR";
+import { Suspense } from "react";
 
 
 const ModelContainer = () => {
     return <>
         <ARButton 
         sessionInit={{
-            requiredFeatures: ["hit-test"],
-            optionalFeatures: ["dom-overlay"],
+            optionalFeatures: ["hit-test", "dom-overlay"],
         }}
         />
         <Canvas shadows camera={{position: [-1, 1, 1], zoom: 1.8}}>
@@ -26,7 +26,9 @@ const ModelContainer = () => {
                 shadow-mapSize-height={1024}
             />
             <XR>
+            <Suspense fallback={null}>
                 <ModelsStart/>
+            </Suspense>
             </XR>
         </Canvas>
     </>
