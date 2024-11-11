@@ -6,7 +6,7 @@ import {
     XRSpace,
     XRHitTest,
     useXRInputSourceStateContext,
-    XRControllerModel
+    XRControllerModel, XROrigin
 } from "@react-three/xr";
 import ModelsStart from "../ModelsStart/index";
 import {Suspense} from "react";
@@ -50,6 +50,7 @@ const ModelContainer = () => {
             {/*</button>*/}
             <Canvas shadows camera={{position: [1, 1, 1], zoom: 1.9}}>
                 <XR store={store}>
+                    <XROrigin />
                     <Suspense fallback={null}>
                         <directionalLight position={[-1, 20, 30]}/>
                         <ambientLight/>
